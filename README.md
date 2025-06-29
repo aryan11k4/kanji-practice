@@ -1,5 +1,19 @@
-I made this website to practice kanji by using flashcards.
+# JLPT Kanji Quiz
 
-NOTE:
-Right now it only contains N5 kanjis and those also don't include multiple readings.
-I will add other levels later and also multiple readings of N5.
+A web-based application for practicing Japanese kanji through interactive quizzes.
+
+## Current Status
+- ✅ N5 level kanji included
+- ⏳ Single reading per kanji (multiple readings coming soon)
+- ⏳ N4-N1 levels (planned)
+
+## Features
+- Interactive quiz format
+- Reading and meaning practice
+- Score tracking
+- Responsive design
+
+## Roadmap
+- [ ] Add multiple readings for N5 kanji
+- [ ] Add N4, N3, N2, and N1 levels
+- [ ] Additional practice modes
