@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Japanese Kanji Quiz</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Start Page -->
+      <div id="start-page" class="start-page">
+        <h1>🈴 JLPT Kanji Quiz</h1>
+        <p style="font-size: 1.2em; color: #666; margin-bottom: 40px">
+          Test your Japanese kanji knowledge across all JLPT levels
+        </p>
+        <button class="main-btn" onclick="showLevelSelection()">
+          Start Quiz
+        </button>
+      </div>
+
+      <!-- Level Selection -->
+      <div id="level-selection" class="level-selection">
+        <h1>Select JLPT Level</h1>
+        <div class="level-grid">
+          <div class="level-btn n5" onclick="startQuiz('N5')">
+            <div class="level-title">N5</div>
+            <div class="level-desc">Beginner Level</div>
+            <div class="level-stats">~100 kanji • Basic vocabulary</div>
+          </div>
+          <div class="level-btn n4" onclick="startQuiz('N4')">
+            <div class="level-title">N4</div>
+            <div class="level-desc">Elementary Level</div>
+            <div class="level-stats">~300 kanji • Daily expressions</div>
+          </div>
+          <div class="level-btn n3" onclick="startQuiz('N3')">
+            <div class="level-title">N3</div>
+            <div class="level-desc">Intermediate Level</div>
+            <div class="level-stats">~650 kanji • Everyday topics</div>
+          </div>
+          <div class="level-btn n2" onclick="startQuiz('N2')">
+            <div class="level-title">N2</div>
+            <div class="level-desc">Upper Intermediate</div>
+            <div class="level-stats">~1000 kanji • News & articles</div>
+          </div>
+          <div class="level-btn n1" onclick="startQuiz('N1')">
+            <div class="level-title">N1</div>
+            <div class="level-desc">Advanced Level</div>
+            <div class="level-stats">~2000+ kanji • Academic texts</div>
+          </div>
+        </div>
+        <button class="back-btn" onclick="showStartPage()">← Back</button>
+      </div>
+
+      <!-- Quiz Container -->
+      <div id="quiz-container" class="quiz-container">
+        <h1 id="quiz-title">🈴 Kanji Quiz</h1>
+
+        <div class="score-board">
+          <div class="score">Score: <span id="score">0</span></div>
+          <div class="total">
+            Question: <span id="current">1</span> / <span id="total">10</span>
+          </div>
+        </div>
+
+        <div id="quiz-content">
+          <div class="question-container">
+            <div class="question-type" id="question-type">
+              Select the correct reading
+            </div>
+            <div id="question-display"></div>
+            <div class="options" id="options"></div>
+            <div id="feedback" class="feedback"></div>
+          </div>
+
+          <button
+            class="next-btn"
+            id="next-btn"
+            onclick="nextQuestion()"
+            disabled
+          >
+            Next Question
+          </button>
+        </div>
+
+        <div id="quiz-complete" class="quiz-complete">
+          <h2>🎉 Quiz Complete!</h2>
+          <div class="final-score" id="final-score">8/10</div>
+          <p id="performance-text">Great job!</p>
+          <button class="restart-btn" onclick="restartQuiz()">
+            Take Quiz Again
+          </button>
+          <button class="review-btn" onclick="showReview()">
+            Review Questions
+          </button>
+          <button class="back-btn" onclick="showLevelSelection()">
+            ← Choose Different Level
+          </button>
+        </div>
+
+        <!-- Add this new review section -->
+        <div id="review-section" class="review-section">
+          <h2>📚 Question Review</h2>
+          <div id="review-container" class="review-container">
+            <!-- Review content will be populated by JavaScript -->
+          </div>
+          <button class="back-btn" onclick="backToResults()">
+            ← Back to Results
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="kanji-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
