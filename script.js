@@ -96,7 +96,9 @@ function displayQuestion() {
   selectedAnswer = null;
   answered = false;
   document.getElementById("next-btn").disabled = true;
-  document.getElementById("feedback").style.display = "none";
+  const feedback = document.getElementById("feedback");
+  feedback.style.display = "none";
+  // Remove the classList.remove line
 
   document.getElementById("current").textContent = currentQuestionIndex + 1;
   document.getElementById("total").textContent = questions.length;
@@ -211,6 +213,7 @@ function selectAnswer(answer, element) {
 
   feedback.innerHTML = explanationHTML;
   feedback.style.display = "block";
+  //feedback.classList.add("show-desktop");
   document.getElementById("next-btn").disabled = false;
 }
 
@@ -301,12 +304,12 @@ function backToResults() {
   document.getElementById("review-section").style.display = "none";
   document.getElementById("quiz-complete").style.display = "block";
 }
- 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        const nextBtn = document.getElementById('next-btn');
-        if (!nextBtn.disabled) {
-            nextQuestion();
-        }
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    const nextBtn = document.getElementById("next-btn");
+    if (!nextBtn.disabled) {
+      nextQuestion();
     }
+  }
 });
