@@ -1,5 +1,6 @@
 let currentLevel = "";
 let currentQuestionIndex = 0;
+let currentOptionIndex = 0;
 let reviewData = [];
 let score = 0;
 let questions = [];
@@ -94,6 +95,7 @@ function displayQuestion() {
   const optionsContainer = document.getElementById("options");
 
   selectedAnswer = null;
+  currentOptionIndex = 0; // Reset to first option
   answered = false;
   document.getElementById("next-btn").disabled = true;
   const feedback = document.getElementById("feedback");
@@ -119,6 +121,10 @@ function displayQuestion() {
     optionElement.onclick = () => selectAnswer(option, optionElement);
     optionsContainer.appendChild(optionElement);
   });
+  // Highlight the first option by default
+  if (optionsContainer.children.length > 0) {
+    optionsContainer.children[0].classList.add("highlighted");
+  }
 }
 
 function selectAnswer(answer, element) {
@@ -146,6 +152,11 @@ function selectAnswer(answer, element) {
   });
 
   element.classList.add(isCorrect ? "correct" : "incorrect");
+
+  // Remove highlight from all options after selection
+  document
+    .querySelectorAll(".option")
+    .forEach((opt) => opt.classList.remove("highlighted"));
 
   if (!isCorrect) {
     document.querySelectorAll(".option").forEach((opt) => {
@@ -306,10 +317,53 @@ function backToResults() {
 }
 
 document.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    const nextBtn = document.getElementById("next-btn");
-    if (!nextBtn.disabled) {
-      nextQuestion();
-    }
+  const options = document.querySelectorAll(".option");
+
+  if (options.length === 0) return; // No options available
+
+  switch (event.key) {
+    case "ArrowUp":
+      event.preventDefault();
+      if (!answered) {
+        currentOptionIndex =
+          (currentOptionIndex - 1 + options.length) % options.length;
+        updateHighlight();
+      }
+      break;
+
+    case "ArrowDown":
+      event.preventDefault();
+      if (!answered) {
+        currentOptionIndex = (currentOptionIndex + 1) % options.length;
+        updateHighlight();
+      }
+      break;
+
+    case "Enter":
+      event.preventDefault();
+      if (!answered && options[currentOptionIndex]) {
+        // Select the highlighted option
+        const highlightedOption = options[currentOptionIndex];
+        selectAnswer(highlightedOption.textContent, highlightedOption);
+      } else {
+        // If already answered, go to next question
+        const nextBtn = document.getElementById("next-btn");
+        if (!nextBtn.disabled) {
+          nextQuestion();
+        }
+      }
+      break;
   }
 });
+
+function updateHighlight() {
+  const options = document.querySelectorAll(".option");
+
+  // Remove highlight from all options
+  options.forEach((option) => option.classList.remove("highlighted"));
+
+  // Add highlight to current option
+  if (options[currentOptionIndex]) {
+    options[currentOptionIndex].classList.add("highlighted");
+  }
+}
